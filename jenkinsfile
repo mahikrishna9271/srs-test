@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+       stage('checkout-src-code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mahikrishna9271/srs-test.git'
+                
+            }
+        }
+       stage('terraform init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+               stage('terraform apply') {
+            steps {
+                    sh 'terraform apply --auto-approve'
+            }
+        }
+
+    }
+}
